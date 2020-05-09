@@ -1,0 +1,10 @@
+body {
+    background-color: #efefef;
+}
+$theme-colors: (
+        "wildflix": #000000,
+);
+.color-custom{
+color: #F22003 !important;
+}
+@import "~bootstrap/scss/bootstrap";
