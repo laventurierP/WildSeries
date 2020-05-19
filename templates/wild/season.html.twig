@@ -6,7 +6,7 @@
     <p>{{ program.summary }}</p><br>
     <ul>
         {% for episode in episode %}
-            <li><strong>Episode {{ episode.number }} :</strong>  {{ episode.title }}</li>
+            <li><strong>Episode {{ episode.number }} :</strong>  <a href="{{ path('wild_show_episode', {id: episode.id})}}">{{ episode.title }}</a></li>
             <ul>
                 <li>{{ episode.synopsis }}</li>
             </ul>

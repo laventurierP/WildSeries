@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <div>
+            <h3 class="mt-0">Série : {{ program.title }} </h3>
+            <img class="align-self-start" src="{{ program.poster }}">
+            <p>Résumé : {{ program.summary }}</p>
+        </div>
+        <div>
+            <strong>Saison : </strong><a href="{{ path('wild_show_season', { id: season.id }) }}">Voir la page saison correspondante </a><br>
+            <strong>Programme : </strong><a href="{{ path('wild_show_program', { programName: program.title | lower | replace({" " : "-" }) }) }}">Voir la serie</a>
+        </div>
+{% endblock %}
