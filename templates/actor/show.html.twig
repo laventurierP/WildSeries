@@ -7,7 +7,7 @@
     <h3>{{ actor.name }}</h3>
                 <ul>
                     {% for serie in actor.programs %}
-                        <li>{{ serie.title }}</li>
+                        <a href="{{ path('program_show', {'id': serie.id}) }}"><li>{{ serie.title }}</li></a>
                     {% endfor %}
 
                 </ul>
