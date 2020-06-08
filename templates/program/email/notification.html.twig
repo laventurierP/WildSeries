@@ -1,0 +1,29 @@
+{% extends 'baseMail.html.twig' %}
+
+{% block title %}Nouvelle série !!!!{% endblock %}
+
+{% block body %}
+    <container style="background-color: #1b1e21; margin:0;padding:0;width:100%;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            <h1 style="color:red;text-align: left;padding:5px; margin-left:5px;">WildFlix</h1>
+    </container>
+    <container style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">
+        <row class="header">
+            <columns>
+                <h1 class="text-center">Nouveau program : {{ name.title }}!</h1>
+                <p>Avec les acteurs:</p>
+                <ul>
+                    {% for actor in actors %}
+                    <li style="list-style-type: none;">{{ actor.name }}</li>
+                    {% endfor %}
+                </ul>
+                <h3 class="text-center">Venez la découvrir en cliquant sur ce lien :</h3>
+                <div style="display: flex;justify-content: center;align-items: center;;">
+                    <a class="text-center" style="text-decoration:none;" href="http://localhost:8001/program/{{ name.slug }}"><button style="text-align:center;background-color: #1b1e21;color:red;min-width:30%; padding:5px;border-radius: 3px;" class="text-center">{{ name.title }}</button></a>
+                </div>
+            </columns>
+
+            {# ... #}
+        </row>
+    </container>
+
+{% endblock %}
