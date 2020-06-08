@@ -25,6 +25,21 @@
             </tr>
         </tbody>
     </table>
+    {% if app.user %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Envoyer') }}</button>
+    {{ form_end(form) }}
+    {% endif %}
+
+    <h3>All comments</h3>
+    {% for comment in episode.comments|sort %}
+        <div>
+            <h6>{{ comment.author.email }} ({{ comment.rate }}/5)</h6>
+            <p>{{ comment.comment }}</p>
+        </div>
+    {% endfor %}
+
 
     <a href="{{ path('episode_index') }}">back to list</a>
 

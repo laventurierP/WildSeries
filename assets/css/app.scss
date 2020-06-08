@@ -1,3 +1,5 @@
+
+
 body {
     background-color: #efefef;
 }
@@ -8,3 +10,23 @@ $theme-colors: (
 color: #F22003 !important;
 }
 @import "~bootstrap/scss/bootstrap";
+
+.loginLogout {
+    text-decoration: none;
+    color: #F22003;
+}
+
+.loginLogout:hover {
+    color: #F22003;
+    text-decoration: none;
+    border-bottom: 2px solid #F22003;
+}
+
+.colorMail {
+    color:darkorange;
+    margin:0 10px;
+}
+.userEmail {
+    margin-left: 20px;
+}
+
