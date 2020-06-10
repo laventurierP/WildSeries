@@ -4,7 +4,9 @@
 
 {% block body %}
     <h1>Program</h1>
-
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('program_edit', { 'slug': program.slug} ) }}"><button class="btn btn-primary">Éditer</button></a>
+    {%endif%}
     <table class="table">
         <tbody>
             <tr>

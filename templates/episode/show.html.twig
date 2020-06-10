@@ -31,12 +31,15 @@
     <button class="btn">{{ button_label|default('Envoyer') }}</button>
     {{ form_end(form) }}
     {% endif %}
-
     <h3>All comments</h3>
+
     {% for comment in episode.comments|sort %}
         <div>
-            <h6>{{ comment.author.email }} ({{ comment.rate }}/5)</h6>
+            <h6>{{ comment.author.email }} ({{ comment.rate }}/5){% if comment.author.email == app.user.email or app.user.roles.0=="ROLE_ADMIN"%}
+            <a href="{{ path('comment_delete',{'id': comment.id}) }}"><button class="btn btn-dark">supprimer le commentaire</button></a>
+            {% endif %}</h6>
             <p>{{ comment.comment }}</p>
+
         </div>
     {% endfor %}
 
