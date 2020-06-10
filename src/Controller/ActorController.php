@@ -35,7 +35,6 @@ class ActorController extends AbstractController
         $actor = new Actor();
         $form = $this->createForm(ActorType::class, $actor);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $slug =$slugify->generate($actor->getName());
             $actor->setSlug($slug);
