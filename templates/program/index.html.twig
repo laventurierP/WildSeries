@@ -14,7 +14,9 @@
                 <th>Poster</th>
                 <th>Year</th>
                 <th>Country</th>
+                <th>actors</th>
                 <th>actions</th>
+
             </tr>
         </thead>
         <tbody>
@@ -26,6 +28,12 @@
                 <td><img style="height:100px;" src="{{ program.poster }}"></td>
                 <td>{{ program.year }}</td>
                 <td>{{ program.country }}</td>
+                <td>{% for actor in program.actors %}
+                {{ actor.name }},
+                {% else %}
+                <td>Il n'y a pas d'acteur ds cette serie</td>
+                {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('program_show', {'slug': program.slug}) }}">show</a>
                     <a href="{{ path('program_edit', {'slug': program.slug}) }}">edit</a>
