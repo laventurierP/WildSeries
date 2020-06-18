@@ -9,9 +9,11 @@ use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/program")
@@ -22,7 +24,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/", name="program_index", methods={"GET"})
      */
-    public function index(ProgramRepository $programRepository): Response
+    public function index(ProgramRepository $programRepository, SessionInterface $session): Response
     {
         return $this->render('program/index.html.twig', [
             'programs' => $programRepository->findAllWithCategoriesAndActors(),
@@ -49,13 +51,14 @@ class ProgramController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($program);
             $entityManager->flush();
-            $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
-                ->to($this->getParameter('mailer_to'))
-                ->subject('Une nouvelle série vient d\'être publiée !')
-                ->html($this->renderView('program/email/notification.html.twig', ['name'=>$program, 'actors'=>$program->getActors()]));
+//            $email = (new Email())
+//                ->from($this->getParameter('mailer_from'))
+//                ->to($this->getParameter('mailer_to'))
+//                ->subject('Une nouvelle série vient d\'être publiée !')
+//                ->html($this->renderView('program/email/notification.html.twig', ['name'=>$program, 'actors'=>$program->getActors()]));
 
-            $mailer->send($email);
+//            $mailer->send($email);
+            $this->addFlash('success', 'Le programme à bien été créé');
 
             return $this->redirectToRoute('program_index');
         }
@@ -95,6 +98,8 @@ class ProgramController extends AbstractController
             $program->setSlug($slug);
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Le programme à bien été modifié');
+
             return $this->redirectToRoute('program_index');
         }
 
@@ -114,7 +119,7 @@ class ProgramController extends AbstractController
             $entityManager->remove($program);
             $entityManager->flush();
         }
-
+        $this->addFlash('danger', 'Le programme à bien été supprimé');
         return $this->redirectToRoute('program_index');
     }
 }
